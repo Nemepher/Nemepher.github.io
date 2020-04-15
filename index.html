@@ -15,7 +15,7 @@
 
 var Boid = function() {
 
-	var vector = new THREE.Vector3(), _acceleration, _width = 900, _height = 900, _depth = 1600, _goal, _neighborhoodRadius = 800, _maxSpeed = 1, _maxSteerForce = 0.1, _avoidWalls = false;
+	var vector = new THREE.Vector3(), _acceleration, _width = 900, _height = 900, _depth = 1600, _goal, _neighborhoodRadius = 800, _maxSpeed = 1, _maxSteerForce = 0.1, _avoidWalls = true;
 
 	this.position = new THREE.Vector3();
 	this.velocity = new THREE.Vector3();
@@ -119,7 +119,7 @@ var Boid = function() {
 
 		var distance = this.position.distanceTo( target );
 
-		if ( distance < 200 ) {
+		if ( distance < 400 ) {
 
 			var steer = new THREE.Vector3();
 
@@ -222,7 +222,7 @@ var Boid = function() {
 
 		for ( var i = 0, il = boids.length; i < il; i ++ ) {
 
-			if ( Math.random() > 0.2 ) continue;
+			if ( Math.random() > 0.3 ) continue;
 
 			boid = boids[ i ];
 			distance = boid.position.distanceTo( this.position );
@@ -241,6 +241,10 @@ var Boid = function() {
 }
 
 
+var Bird = new THREE.Geometry();
+
+
+
 var SCREEN_WIDTH = window.innerWidth,
 SCREEN_HEIGHT = window.innerHeight,
 SCREEN_WIDTH_HALF = SCREEN_WIDTH  / 5,
@@ -256,7 +260,7 @@ animate();
 
 function init() {
 
-	camera = new THREE.PerspectiveCamera( 75, SCREEN_WIDTH / SCREEN_HEIGHT, 1, 10000 );
+	camera = new THREE.PerspectiveCamera( 45, SCREEN_WIDTH / SCREEN_HEIGHT, 1, 10000 );
 	camera.position.z = 450;
 
 	scene = new THREE.Scene();
@@ -264,7 +268,7 @@ function init() {
 	birds = [];
 	boids = [];
 
-	for ( var i = 0; i < 190; i ++ ) {
+	for ( var i = 0; i < 100; i ++ ) {
 
 		boid = boids[ i ] = new Boid();
 		boid.position.x = Math.random() * 400 - 200;
@@ -287,6 +291,7 @@ function init() {
 	renderer.setSize( SCREEN_WIDTH, SCREEN_HEIGHT );
 
 	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+	document.addEventListener('touchmove', onDocumentTouchMove, false);
 	document.body.appendChild( renderer.domElement );
 	window.addEventListener( 'resize', onWindowResize, false );
 }
@@ -298,16 +303,24 @@ function onWindowResize() {
 	renderer.setSize( window.innerWidth, window.innerHeight );
 }
 
+
 function onDocumentMouseMove( event ) {
-
 	var vector = new THREE.Vector3( event.clientX - SCREEN_WIDTH_HALF, - event.clientY + SCREEN_HEIGHT_HALF, 0 );
-
 	for ( var i = 0, il = boids.length; i < il; i++ ) {
-
 		boid = boids[ i ];
 		vector.z = boid.position.z;
 		boid.repulse( vector );
 	}
+}
+
+function onDocumentTouchMove( event ){
+	var vector = new THREE.Vector3( event.clientX - SCREEN_WIDTH_HALF, - event.clientY + SCREEN_HEIGHT_HALF, 0 );
+	for ( var i = 0, il = boids.length; i < il; i++ ) {
+		boid = boids[ i ];
+		vector.z = boid.position.z;
+		boid.repulse( vector );
+	}
+
 }
 
 function animate() {
