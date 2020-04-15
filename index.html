@@ -12,7 +12,6 @@
 		<script type="text/javascript">
 
 //https://codemyui.com
-
 var Boid = function() {
 
 	var vector = new THREE.Vector3(), _acceleration, _width = 900, _height = 900, _depth = 1600, _goal, _neighborhoodRadius = 800, _maxSpeed = 1, _maxSteerForce = 0.1, _avoidWalls = true;
@@ -260,7 +259,7 @@ animate();
 
 function init() {
 
-	camera = new THREE.PerspectiveCamera( 45, SCREEN_WIDTH / SCREEN_HEIGHT, 1, 10000 );
+	camera = new THREE.PerspectiveCamera( 55, SCREEN_WIDTH / SCREEN_HEIGHT, 1, 10000 );
 	camera.position.z = 450;
 
 	scene = new THREE.Scene();
