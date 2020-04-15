@@ -30,3 +30,10 @@ q:before, q:after {
 abbr, acronym { 
     border: 0;
     }
+canvas {
+    width: 100vw;
+    height: 100vh;
+    display: block;
+  }
+
+    
