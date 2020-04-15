@@ -241,7 +241,13 @@ var Boid = function() {
 
 
 var Bird = new THREE.Geometry();
+Bird.vertices.push(
+	new THREE.Vector3( -10,  10, 0 ),
+	new THREE.Vector3( -10, -10, 0 ),
+	new THREE.Vector3(  10, -10, 0 )
+);
 
+Bird.faces.push( new THREE.Face3( 0, 1, 2 ) );
 
 
 var SCREEN_WIDTH = window.innerWidth,
@@ -267,7 +273,7 @@ function init() {
 	birds = [];
 	boids = [];
 
-	for ( var i = 0; i < 100; i ++ ) {
+	for ( var i = 0; i < 90; i ++ ) {
 
 		boid = boids[ i ] = new Boid();
 		boid.position.x = Math.random() * 400 - 200;
