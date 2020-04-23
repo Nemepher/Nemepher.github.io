@@ -36,6 +36,6 @@ canvas {
     display: block;
   }
 
-body{margin:0;background-image: url('wp.jpg'); background-repeat: no-repeat;background-attachment: fixed;background-size: cover;}
+body{margin:0;background-image: url('ressources/wp.jpg'); background-repeat: no-repeat;background-attachment: fixed;background-size: cover;color: white;}
 .container{text-align:center;font-family: 'Didact Gothic';font-size: 25px;}
 .container ul li{display:table;margin: 0 auto;}
